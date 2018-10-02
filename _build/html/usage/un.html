@@ -1,0 +1,157 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PixLed &#8212; test  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pixled">
+<h1>PixLed<a class="headerlink" href="#pixled" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="origines-du-projets">
+<h2>Origines du projets<a class="headerlink" href="#origines-du-projets" title="Permalink to this headline">¶</a></h2>
+<p>Le projet consiste en la création d’une matrice de LED de dimensions 32x16 permettant l’affichage de diverses animations ainsi que du texte dans le cadre des soirées de campagne BDE d’une des listes candidates.</p>
+</div>
+<div class="section" id="deroulement">
+<h2>Déroulement<a class="headerlink" href="#deroulement" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="projet-initial">
+<h3>Projet initial<a class="headerlink" href="#projet-initial" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Le projet initial se décompose comme suit :</dt>
+<dd><ul class="first last simple">
+<li>Construction de la matrice de LED avec ses 512 led RGB (!), un cadre en bois, ainsi qu’une surface semi opaque et diffusante en Plexiglass. Les leds utilisés sont des LED adressables types rubans de leds. (<a class="reference external" href="https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf">https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf</a>)</li>
+<li>Pilotage basique du ruban de LED directement depuis le microcontroleur (Arduino Nano) grâce à la librairie d’Adafruit NeoPixel : <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use">https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use</a></li>
+<li>Envoie d’animation à la matrice de LED via le port USB de l’Arduino, depuis un PC ou une Raspberry Pi, notamment grâce à l’utilisation du logiciel OpenSource Glediator : <a class="reference external" href="http://www.solderlab.de/index.php/software/glediator">http://www.solderlab.de/index.php/software/glediator</a></li>
+</ul>
+</dd>
+</dl>
+<p>Bien que divers problèmes aient raisonablement fait leur apparition au cours de chaque étape, comme dans tout projet, le plus important fut sans doute l’impossibilité d’utiliser Glediator, en raison de l’incompatibilité du logiciel avec nos LED RGB**W** (Red Green Blue + White), Glediator ayant seulement été conçu pour les LED RGB. Alors que la recherche de logiciels équivalents pouvant supporter les LED RGBW s’avère rapidement infructueuse, une solution évidente s’impose : nous devons (et nous allons!) coder notre propre application de génération d’animations et de pilotage de matrice de LED <strong>RGBW</strong> (et par extension RGB également).</p>
+</div>
+<div class="section" id="premiere-version">
+<h3>Première version<a class="headerlink" href="#premiere-version" title="Permalink to this headline">¶</a></h3>
+<p>Pour des raisons d’expériences et d’affinités, Java à été choisi comme language de développement, un de nos membres ayant déjà une certaine expérience avec le développement d’interfaces graphiques en Java.
+En deux semaines, une première application est disponible. Executable facilement depuis un PC, elle permet :</p>
+<blockquote>
+<div><ul class="simple">
+<li>De générer diverses animations basiques, parmis lesquelles du texte défilant, une <em>pluie de pixels</em>, ou l’affichage de cercle concentrique multicolores.</li>
+<li>De prévisualiser l’animation en cours.</li>
+<li>De la transmettre au panneau via un port USB.</li>
+</ul>
+</div></blockquote>
+<p>Avec les finitions en parallèle d’un point de vue matériel et programmation de l’Arduino, cette première version de l’application nous a permis d’obtenir un premier panneau de led fonctionnel et simple d’utilisation, qui correspondait à nos attentes initiales.
+Dans la foulée de son utilisation durant la campagne BDE, des fonctionnalités telles que la possibilité de générer des boucles d’animations sont ajoutées.</p>
+</div>
+<div class="section" id="et-apres">
+<h3>Et après?<a class="headerlink" href="#et-apres" title="Permalink to this headline">¶</a></h3>
+<p>De multiples animations ont été conçues. L’interface graphique a également été améliorées.</p>
+</div>
+</div>
+<div class="section" id="futur">
+<h2>Futur<a class="headerlink" href="#futur" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Les objectifs futurs peuvent être classés comme suit, par ordre d’importance :</dt>
+<dd><ul class="first last simple">
+<li>Développement d’autres animations</li>
+<li>Algorithme permettant d’exploiter de manière optimal la led blanche des led RGBW</li>
+<li>Support Bluetooth</li>
+<li>Inclusion de GIF</li>
+<li>Mémoire interne permettant de sauvegarder les configurations/boucles d’animations de l’utilisateur</li>
+<li>Réalisation d’un spectrogramme</li>
+<li>Interconnexion de panneaux dans diverses configurations (d’un point de vue taille et formes), objectif à la fois software et hardware</li>
+<li>Adaption Android/Appli Web</li>
+<li>Jeux</li>
+<li>Interactions avec l’utilisateur de type accéléromètre/écran tactile/Kinnect…</li>
+<li>…</li>
+</ul>
+</dd>
+</dl>
+<p>La distribution du logiciel en tant qu’application de contrôle de matrices de LED DIY, à la façon de Glediator mais plus moderne et supportant le RGBW, est envisagé au cours des prochaines itérations.
+Le code source est déjà disponible à partir du répertoire GitHub : <a class="reference external" href="https://github.com/PaulBreugnot/RGBWMatrixController">https://github.com/PaulBreugnot/RGBWMatrixController</a></p>
+<p>A noter qu’aucune documentation n’est disponible pour le moment………………………………</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">test</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Lag.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="../_sources/usage/un.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
